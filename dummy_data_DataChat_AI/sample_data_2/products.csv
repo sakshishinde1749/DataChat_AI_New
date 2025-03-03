@@ -1,0 +1,11 @@
+product_id,product_name,category,price,stock_quantity
+101,Laptop Pro,Electronics,1299.99,50
+102,Wireless Earbuds,Electronics,129.99,200
+103,Smart Watch,Electronics,249.99,150
+104,Coffee Maker,Appliances,79.99,100
+105,Yoga Mat,Sports,29.99,300
+106,Running Shoes,Sports,89.99,250
+107,Backpack,Accessories,49.99,400
+108,Water Bottle,Accessories,19.99,500
+109,Fitness Tracker,Electronics,99.99,200
+110,Desk Chair,Furniture,199.99,75

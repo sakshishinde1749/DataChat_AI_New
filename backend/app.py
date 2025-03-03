@@ -194,20 +194,26 @@ def process_query():
             
             # Generate detailed explanation
             explanation_prompt = f"""
-            Given this data:
-            {results}
+            Based on the original question: "{question}"
+
+            And the SQL query used to retrieve the data: {sql_query}
             
-            And the original question: "{question}"
+            And the result data retrieved: {results}
+
+            Provide a clear analysis that:
+            1. Directly answers the question with key insights and findings
+            2. Uses proper markdown formatting for better readability:
+               - Use bullet points for listing items
+               - Use tables for structured data when relevant
+               - Use bold and italics for emphasis
+            3. Formats numbers appropriately:
+               - Currency with $ and two decimal places
+               - Percentages with two decimal places
+               - Large numbers with comma separators
+            4. Provides relevant context or trends when helpful
             
-            Provide a comprehensive analysis following these guidelines:
-            1. Start with a clear summary of the key findings
-            2. Include specific numbers and calculations where relevant
-            3. Format currency values with dollar signs and two decimal places
-            4. Mention any interesting patterns or outliers
-            5. If there are missing or zero values, explain their significance
-            6. Keep the explanation clear and concise, but thorough
-            
-            Focus on insights that directly answer the question while providing relevant context.
+            Keep the focus on answering the user's question clearly and concisely.
+            Only mention SQL or technical details if there's a specific issue that affects the results.
             """
             
             explanation = model.generate_content(explanation_prompt).text

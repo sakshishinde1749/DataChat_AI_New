@@ -1,0 +1,9 @@
+customer_id,customer_name,email,country,join_date
+1,John Smith,john.smith@email.com,USA,2023-01-15
+2,Maria Garcia,maria.g@email.com,Spain,2023-02-01
+3,David Kim,david.k@email.com,South Korea,2023-01-20
+4,Emma Watson,emma.w@email.com,UK,2023-03-05
+5,Ali Hassan,ali.h@email.com,UAE,2023-02-15
+6,Sophie Martin,sophie.m@email.com,France,2023-01-10
+7,Lars Anderson,lars.a@email.com,Sweden,2023-03-20
+8,Yuki Tanaka,yuki.t@email.com,Japan,2023-02-28

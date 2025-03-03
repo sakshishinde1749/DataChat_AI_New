@@ -84,3 +84,5 @@ sample_data.csv
 test_data/
 /data/
 .gitignore.save
+
+.myenv/

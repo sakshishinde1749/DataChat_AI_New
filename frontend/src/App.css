@@ -115,6 +115,8 @@ body {
   border-radius: 8px;
   color: var(--text-primary);
   border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  text-align: left;
 }
 
 .data-table {
@@ -308,6 +310,11 @@ h1 {
   margin: 0;
   font-size: 1.2rem;
   color: var(--text-primary);
+}
+
+.chat-actions {
+  display: flex;
+  gap: 10px;
 }
 
 .chat-actions button {
@@ -951,4 +958,81 @@ h1, h2, h3, h4 {
 
 .data-table tbody tr:nth-child(odd) {
   background: var(--bg-tertiary);
+}
+
+.back-to-upload {
+  padding: 8px 16px;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-to-upload:hover {
+  background: var(--accent-hover);
+}
+
+.back-to-upload::before {
+  content: "↑";
+  font-size: 1.1em;
+}
+
+.upload-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-to-chat {
+  padding: 8px 16px;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-to-chat:hover {
+  background: var(--accent-hover);
+}
+
+.back-to-chat::before {
+  content: "←";
+  font-size: 1.1em;
+}
+
+.uploaded-files.current {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.uploaded-files.current h3 {
+  color: var(--text-primary);
+  margin-top: 0;
+}
+
+.uploaded-files.new {
+  margin-top: 20px;
+}
+
+.remove-file {
+  padding: 6px 12px;
+  background: var(--error-color);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 } 

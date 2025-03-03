@@ -11,7 +11,9 @@ function App() {
     tables: [],
     schema: null
   });
+  const [showUpload, setShowUpload] = useState(false);
   const [error, setError] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
 
   const handleFileSelect = async (file, type) => {
     const formData = new FormData();
@@ -43,6 +45,7 @@ function App() {
           tables: [...prev.tables, file.name],
           schema: response.data.schema
         }));
+        setShowUpload(false);
       }
       setError(null);
     } catch (error) {
@@ -51,14 +54,32 @@ function App() {
     }
   };
 
+  const handleBackToUpload = () => {
+    setShowUpload(true);
+  };
+
+  const handleBackToChat = () => {
+    setShowUpload(false);
+  };
+
   return (
     <div className="App">
       {uploadedData.tables.length === 0 ? (
         <UploadPrompt onFileSelect={handleFileSelect} error={error} />
+      ) : showUpload ? (
+        <UploadPrompt 
+          onFileSelect={handleFileSelect} 
+          error={error}
+          onBackToChat={handleBackToChat}
+          uploadedData={uploadedData}
+        />
       ) : (
         <ChatInterface 
           uploadedData={uploadedData}
           onFileRemove={handleFileSelect}
+          onBackToUpload={handleBackToUpload}
+          messages={chatMessages}
+          setMessages={setChatMessages}
         />
       )}
     </div>

@@ -1,10 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 const API_BASE_URL = 'http://127.0.0.1:5000';
 
-function ChatInterface({ data }) {
-  const [messages, setMessages] = useState([]);
+function ChatInterface({ 
+  uploadedData, 
+  onFileRemove, 
+  onBackToUpload,
+  messages,
+  setMessages 
+}) {
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -51,7 +57,6 @@ function ChatInterface({ data }) {
     setInputMessage('');
     setShowSuggestions(false);
     
-    // Add user message to chat
     setMessages(prev => [...prev, {
       type: 'user',
       content: userMessage,
@@ -66,7 +71,6 @@ function ChatInterface({ data }) {
       });
 
       if (response.data.error) {
-        // Handle error with suggestions
         setMessages(prev => [...prev, {
           type: 'error',
           content: {
@@ -76,7 +80,6 @@ function ChatInterface({ data }) {
           timestamp: new Date()
         }]);
       } else {
-        // Handle successful response
         setMessages(prev => [...prev, {
           type: 'assistant',
           content: {
@@ -163,16 +166,16 @@ function ChatInterface({ data }) {
             </div>
             <pre>{message.content.sql}</pre>
           </div>
-          <div className="explanation">
-            <h4>Analysis</h4>
-            <p>{message.content.explanation}</p>
-          </div>
           {message.content.data && (
             <div className="results">
-              <h4>Results</h4>
+              <h4>SQL Query Results</h4>
               {renderDataTable(message.content.data)}
             </div>
           )}
+          <div className="explanation">
+            <h4>Analysis</h4>
+            <ReactMarkdown>{message.content.explanation}</ReactMarkdown>
+          </div>
         </div>
       );
     }
@@ -184,6 +187,12 @@ function ChatInterface({ data }) {
       <div className="chat-header">
         <h3>Data Analysis Chat</h3>
         <div className="chat-actions">
+          <button 
+            className="back-to-upload"
+            onClick={onBackToUpload}
+          >
+            Upload New Files
+          </button>
           <button 
             className="clear-chat"
             onClick={() => setMessages([])}

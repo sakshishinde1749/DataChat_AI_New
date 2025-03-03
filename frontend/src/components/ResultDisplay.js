@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 function ResultDisplay({ result }) {
   return (
@@ -13,11 +14,11 @@ function ResultDisplay({ result }) {
         </div>
       )}
       
-      {/* Show Gemini's explanation of the results */}
+      {/* Show Gemini's explanation of the results using ReactMarkdown */}
       {result.explanation && (
         <div className="explanation">
           <h3>Data Analysis:</h3>
-          <p>{result.explanation}</p>
+          <ReactMarkdown>{result.explanation}</ReactMarkdown>
         </div>
       )}
       
