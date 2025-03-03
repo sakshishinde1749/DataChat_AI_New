@@ -1,0 +1,954 @@
+/* Dark theme variables */
+:root {
+  /* Modern indigo-based color scheme */
+  --bg-primary: #1a1c2c;    /* Dark indigo background */
+  --bg-secondary: #232538;  /* Lighter indigo */
+  --bg-tertiary: #2d2f47;   /* Message background */
+  --text-primary: #e6e7ff;  /* Light indigo text */
+  --text-secondary: #b4b6d9; /* Muted indigo text */
+  --accent-color: #7b5cfa;  /* Bright indigo accent */
+  --accent-hover: #6344e8;  /* Darker accent for hover */
+  --border-color: #363959;  /* Indigo border */
+  --error-color: #ff5c87;   /* Pink error */
+  --success-color: #5ce1e6; /* Cyan success */
+  
+  /* New colors for error messages and suggestions */
+  --error-bg: rgba(255, 92, 135, 0.15);
+  --error-border: #ff5c87;
+  --suggestion-bg: rgba(92, 225, 230, 0.15);
+  --suggestion-text: #ffffff;
+  --suggestion-accent: #5ce1e6;
+}
+
+/* Global styles */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.file-upload {
+  margin: 20px auto;
+  padding: 30px;
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  max-width: 600px;
+  transition: all 0.3s ease;
+}
+
+.file-upload:hover {
+  border-color: var(--accent-color);
+}
+
+.query-input {
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.query-input form {
+  display: flex;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.query-input-field {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.query-submit-btn {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.query-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.result-display {
+  margin: 20px 0;
+  text-align: left;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.sql-query {
+  margin: 1rem 0;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sql-query pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+  color: #e6e6e6;
+  background: var(--bg-secondary);
+}
+
+.explanation {
+  margin: 20px 0;
+  padding: 15px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.data-table {
+  margin: 1rem 0;
+  overflow-x: auto;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+.data-table thead tr {
+  background: var(--bg-secondary) !important;
+}
+
+.data-table th {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table td {
+  padding: 10px 16px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table tbody tr:nth-child(odd) {
+  background: var(--bg-tertiary);
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--bg-secondary);
+}
+
+.data-table tbody tr:hover {
+  background: var(--bg-primary);
+}
+
+/* Row count styling */
+.row-count {
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.error {
+  color: #dc3545;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f8d7da;
+  border-radius: 4px;
+}
+
+.success {
+  background: rgba(0, 166, 125, 0.1);
+  color: var(--accent-color);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 0;
+  border: 1px solid var(--accent-color);
+}
+
+.loading {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  text-align: center;
+  font-style: italic;
+}
+
+.query-hint {
+  color: #666;
+  font-size: 0.9em;
+  margin: 10px 0 20px;
+  text-align: left;
+  max-width: 800px;
+  margin: 10px auto 20px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background-color: white;
+}
+
+.data-table th {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  font-weight: bold;
+}
+
+.data-table td {
+  padding: 12px;
+  border: 1px solid #dee2e6;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Add these styles to your existing CSS */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-input {
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.file-upload {
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.file-upload:hover {
+  border-color: #007bff;
+}
+
+/* Add these styles to your existing CSS */
+.subtitle {
+  color: #666;
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+/* Add these styles to your existing CSS */
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  margin: 20px auto;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.chat-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border-color);
+}
+
+.chat-actions button:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Message groups */
+.message-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  gap: 8px;
+}
+
+/* User message styling */
+.message.user {
+  align-self: flex-end;
+}
+
+.message.user .message-content {
+  background: var(--accent-color);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 12px 12px 0 12px;
+}
+
+/* Assistant message styling */
+.message.assistant {
+  align-self: flex-start;
+}
+
+.message.assistant .message-content {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  border-radius: 12px 12px 12px 0;
+  border: 1px solid var(--border-color);
+}
+
+.message.error {
+  float: left;
+  background: #dc3545;
+  color: white;
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.9em;
+}
+
+.message-sender {
+  font-weight: 500;
+}
+
+.message-timestamp {
+  color: #6c757d;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.copy-btn {
+  padding: 4px 8px;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.copy-btn:hover {
+  background: var(--accent-hover);
+}
+
+.table-header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.data-table-container {
+  margin-top: 16px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.data-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.data-table-container th {
+  background: var(--bg-primary);
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.data-table-container td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.data-table-container tr:last-child td {
+  border-bottom: none;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-size: 0.9em;
+  background: var(--bg-tertiary);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.chat-input-form {
+  padding: 16px 24px;
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 12px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(0, 166, 125, 0.2);
+}
+
+.chat-submit-btn {
+  padding: 12px 24px;
+  background: var(--accent-color);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.chat-submit-btn:hover {
+  background: var(--accent-hover);
+}
+
+.chat-submit-btn:disabled {
+  background: var(--border-color);
+  cursor: not-allowed;
+}
+
+/* Add these new styles */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-tertiary);
+}
+
+/* Ensure the loading indicator stays at the bottom */
+.message.assistant.loading {
+  margin-top: auto;
+}
+
+/* Headers and text */
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+/* Suggestions */
+.suggestions {
+  background: var(--bg-tertiary);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.suggestions h4 {
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+.suggestion-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.suggestion-btn {
+  padding: 14px 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.suggestion-btn:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+/* Analysis section */
+.analysis {
+  background: var(--bg-tertiary);
+  padding: 15px;
+  border-radius: 8px;
+  color: var(--text-primary);
+  margin: 15px 0;
+  border: 1px solid var(--border-color);
+}
+
+.section-header h4 {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Add these new styles */
+
+.upload-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--bg-primary);
+}
+
+.upload-content {
+  background: var(--bg-secondary);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.upload-content h2 {
+  color: var(--text-primary);
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.upload-content > p {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.upload-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.upload-option {
+  background: var(--bg-tertiary);
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.upload-option:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.upload-option h3 {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.upload-option p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.file-input:hover {
+  border-color: var(--accent-color);
+}
+
+.upload-info {
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+
+.upload-info h4 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+}
+
+.upload-info ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.upload-info li {
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-info li::before {
+  content: "✓";
+  color: var(--accent-color);
+}
+
+/* Add these styles for the file drop zone */
+.file-drop-zone {
+  position: relative;
+  padding: 20px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: var(--bg-secondary);
+  cursor: pointer;
+}
+
+.file-drop-zone.active {
+  border-color: var(--accent-color);
+  background: rgba(123, 92, 250, 0.1);
+}
+
+.file-drop-zone input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-drop-zone span {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+}
+
+.option-icon {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.upload-error {
+  color: var(--error-color);
+  background: rgba(255, 92, 135, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+  border: 1px solid var(--error-color);
+}
+
+/* Update upload info styles */
+.upload-info ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.upload-info li {
+  background: var(--bg-secondary);
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.upload-info li:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.upload-info li::before {
+  content: "✓";
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+/* Add these styles */
+.error-suggestion {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--suggestion-bg);
+  border: 1px solid var(--suggestion-accent);
+  border-radius: 8px;
+}
+
+.error-suggestion p:first-child {
+  color: var(--suggestion-accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.error-suggestion p:last-child {
+  color: var(--suggestion-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.message.error .message-content {
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  padding: 16px;
+  border-radius: 8px;
+  color: var(--text-primary);
+}
+
+.upload-zone {
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--bg-secondary);
+  margin-bottom: 20px;
+}
+
+.upload-zone.active {
+  border-color: var(--accent-color);
+  background: rgba(123, 92, 250, 0.1);
+}
+
+.uploaded-files {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.file-item button {
+  padding: 6px 12px;
+  background: var(--error-color);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.upload-button {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-top: 16px;
+  font-size: 1rem;
+}
+
+.upload-button:hover {
+  background: var(--accent-hover);
+}
+
+/* Add these new styles */
+.results {
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+.results h4 {
+  margin: 0;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+/* Style for numeric values */
+.data-table td[data-type="number"],
+.data-table td[data-type="currency"] {
+  font-family: monospace;
+  text-align: right;
+}
+
+/* Alternating row colors for better readability */
+.data-table tbody tr:nth-child(even) {
+  background: var(--bg-secondary);
+}
+
+.data-table tbody tr:nth-child(odd) {
+  background: var(--bg-tertiary);
+} 

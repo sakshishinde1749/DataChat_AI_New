@@ -1,0 +1,8 @@
+{
+  "short_name": "DataChat AI",
+  "name": "DataChat AI - Intelligent Data Analysis",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+} 
