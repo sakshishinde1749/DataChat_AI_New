@@ -10,9 +10,8 @@ DataChat AI is an intelligent data analysis platform that allows users to intera
 - 🔄 **Smart SQL Generation**: Automatically converts questions to optimized SQL queries
 - 💬 **Chat Interface**: Modern, ChatGPT-like conversation experience
 - 📊 **Instant Analysis**: Get real-time insights from your data
-- 🧠 **Context-Aware**: Maintains conversation context for follow-up questions
-- 📁 **Multiple File Support**: Handles both CSV and PDF files (PDF support coming soon)
-- ⏰ **24-Hour History**: Maintains chat history with automatic cleanup
+- 📁 **Multiple File Analysis**: Upload and analyze multiple CSV files simultaneously
+- 🔄 **Dynamic File Switching**: Switch between different uploaded files during analysis
 - 🎨 **Modern UI**: Clean, intuitive interface with dark mode
 
 ## 🛠️ Tech Stack
@@ -31,6 +30,12 @@ DataChat AI is an intelligent data analysis platform that allows users to intera
 - SQLite for data storage
 - Pandas for data manipulation
 
+## 📄 Supported File Formats
+
+Currently, DataChat AI supports:
+
+- CSV (Comma-Separated Values) files
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -43,7 +48,7 @@ DataChat AI is an intelligent data analysis platform that allows users to intera
 
 1. Clone the repositorygit clone
 
-- https://github.com/sakshishinde1749/DataChat_AI.git
+- https://github.com/sakshishinde1749/DataChat_AI_New.git
 - cd datachat-ai
 
 2. Set up the backend
@@ -79,21 +84,15 @@ The application will be available at http://localhost:3000
 
 ## 📖 Usage
 
-1. Upload your data file (CSV)
-2. Ask questions in natural language
-3. Get instant analysis with:
+1. Upload one or multiple CSV data files
+2. Select the file you want to analyze from the uploaded files
+3. Ask questions in natural language about the selected data
+4. Get instant analysis with:
    - Generated SQL query
    - Data results
    - AI-powered explanation
-4. Continue the conversation with follow-up questions
-
-### Example Questions
-
-- "What are the total sales in 2024?"
-- "Show me the best-selling products"
-- "Compare January and February sales"
-- "What is the average order value?"
-- "Which product generated the highest revenue?"
+5. Switch between different files as needed
+6. Continue the conversation with follow-up questions
 
 ## 📁 Project Structure
 
@@ -113,12 +112,12 @@ datachat-ai/
 - │ └── package.json
 - └── README.md
 
-Also, create a requirements.txt file in your backend directory:
-
-- pip install -r requirements.txt
-
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a new branch
 3. Make your changes and commit them
+
+
+
+
