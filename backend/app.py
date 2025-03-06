@@ -6,7 +6,7 @@ import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 from database import create_table_from_file, init_database
-from gemini_service import process_question
+from gemini_service import is_valid_query
 import traceback
 from werkzeug.utils import secure_filename
 
@@ -124,6 +124,14 @@ def process_query():
 
         question = data['question']
         print(f"Processing question: {question}")
+
+        # Validate the question first
+        is_valid, error_message = is_valid_query(question)
+        if not is_valid:
+            return jsonify({
+                'error': error_message,
+                'suggestion': "Try asking something like: 'What are the total sales?' or 'Show me orders from January 2024'"
+            }), 400
 
         # Get current schema with error checking
         try:
