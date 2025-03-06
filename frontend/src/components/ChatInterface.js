@@ -111,7 +111,7 @@ function ChatInterface({
   const formatValue = (value) => {
     if (typeof value === 'number') {
       if (String(value).includes('.')) {
-        return `$${value.toFixed(2)}`;
+        return `${value.toFixed(2)}`;
       }
       return value;
     }

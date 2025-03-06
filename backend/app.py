@@ -152,21 +152,67 @@ def process_query():
 
         # Generate SQL query using Gemini
         try:
-            model = genai.GenerativeModel('gemini-1.5-flash')
+            model = genai.GenerativeModel('gemini-2.0-flash')
             sql_prompt = f"""
             Given these database tables and their structure:
             {schema_str}
 
-            Write a comprehensive SQL query to answer this question: "{question}"
-            
-            Requirements:
-            1. Use LEFT JOINs when counting or summing to include rows with zero values
-            2. Include meaningful column names using AS for better readability
-            3. Format numeric values properly (especially prices)
-            4. Order results in a logical way (e.g., alphabetically for names, descending for amounts)
-            5. Only use the tables and columns shown above
-            
-            Return only the raw SQL query without any markdown formatting or explanation.
+            Write a SQL query to answer this question: "{question}"
+
+            Analysis Guidelines:
+            1. Schema Analysis:
+               - Examine table relationships through foreign key columns
+               - Understand data types and their meaning:
+                 * Percentage fields (like discounts) are stored as numbers (e.g., 10 means 10%)
+                 * Price/monetary fields need decimal precision
+                 * Dates may need formatting
+               - Identify required tables and their relationships
+
+            2. Data Operations:
+               - For calculations with percentages:
+                 * Always divide percentage values by 100
+                 * Example: 10% should be calculated as value/100
+                 * Use (1 - discount/100) for discount calculations
+               - For monetary calculations:
+                 * Use ROUND() for consistent decimal places
+                 * Maintain proper calculation order
+               - For counting and aggregations:
+                 * Choose appropriate functions (SUM, AVG, COUNT)
+                 * Group results as needed
+                 * Use LEFT JOIN when counting from reference tables
+                 * Include all records from main entity
+                - For table relationships:
+                 * ALWAYS use LEFT JOIN from primary entity to preserve all records
+                 * Start FROM the table containing all records needed (e.g., customers for customer queries)
+                 * Chain additional LEFT JOINs for related data
+                 * Use COALESCE/IFNULL for NULL values (e.g., COALESCE(SUM(...), 0))
+                 * Show zero/empty values for missing data
+
+            3. Query Structure:
+              - Start with the main entity table
+              - Use LEFT JOIN (not regular JOIN) to preserve all records
+              - Apply filters in WHERE clause after joins
+              - Group by main entity identifiers
+              - Order results meaningfully
+
+            4. Result Formatting:
+               - Use clear column aliases
+               - Ensure proper ordering
+               - Format output for readability
+               - Include supporting metrics when:
+                 * Counting items (show the count)
+                 * Finding maximums (show the value)
+                 * Calculating totals (show the total)
+                 * Comparing data (show relevant measures)
+               - Name columns descriptively (e.g., number_of_orders instead of count)
+               - For empty results:
+                 * Return meaningful message instead of empty set
+                 * Show relevant thresholds or criteria
+                 * Indicate why no results were found
+               - Include all relevant information in results
+
+            Generate a focused SQL query that provides complete information to answer the question.
+            Return only the SQL query, no explanations.
             """
 
             print("Sending SQL prompt to Gemini:", sql_prompt)
@@ -207,7 +253,7 @@ def process_query():
                - Use tables for structured data when relevant
                - Use bold and italics for emphasis
             3. Formats numbers appropriately:
-               - Currency with $ and two decimal places
+               - Currency with ₹ and two decimal places
                - Percentages with two decimal places
                - Large numbers with comma separators
             4. Provides relevant context or trends when helpful
@@ -223,8 +269,20 @@ def process_query():
             for row in results:
                 formatted_row = {}
                 for key, value in row.items():
-                    if isinstance(value, (int, float)) and 'price' in key.lower() or 'total' in key.lower() or 'amount' in key.lower():
-                        formatted_row[key] = f"${value:.2f}"
+                    # Only format as currency if it's a monetary value
+                    if isinstance(value, (int, float)):
+                        key_lower = key.lower()
+                        # Check specifically for monetary columns
+                        if ('price' in key_lower or 
+                            'amount' in key_lower or 
+                            'sales' in key_lower or
+                            'revenue' in key_lower or 
+                            'spent' in key_lower or 
+                            'cost' in key_lower):
+                            formatted_row[key] = f"₹{value:.2f}"
+                        else:
+                            # Keep other numeric values as is (like quantity)
+                            formatted_row[key] = value
                     else:
                         formatted_row[key] = value
                 formatted_results.append(formatted_row)
